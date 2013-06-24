@@ -39,7 +39,6 @@ void setup()
 void loop(){
  
   Point p = ts.getPoint();
-  
   p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
   p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
   
@@ -65,14 +64,14 @@ void loop(){
        printScreen(numDays,30,8);
     }
   }
-
+  
   delay(100);
 }
 
 void printScreen(int days, int left, int hSize){
-        itoa(days, buffer, 10);
-        Tft.paintScreenBlack();
-        Tft.drawString(buffer,left,40,hSize,WHITE);
-        Tft.drawString("Days",0,160,4,WHITE);
-        Tft.drawString("Since...",0,200,4,WHITE);
+  itoa(days, buffer, 10);
+  Tft.paintScreenBlack();
+  Tft.drawString(buffer,left,40,hSize,WHITE);
+  Tft.drawString("Days",0,160,4,WHITE);
+  Tft.drawString("Since...",0,200,4,WHITE);
 } 
