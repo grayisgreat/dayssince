@@ -32,42 +32,39 @@ int bluetoothRx = 19;  //A5 atches jumper
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
 
 void setup(){
+//  Serial.begin(9600);
+  bluetooth.println("U,9600,N");
+  bluetooth.begin(9600);
   Tft.init();  //init TFT library
   Tft.drawString("0",90,40,10,WHITE);
   Tft.drawString("Days",0,160,4,WHITE);
   Tft.drawString("Since...",0,200,4,WHITE);
-  bluetooth.println("U,9600,N");
-  bluetooth.begin(9600);
 }
 
 void loop(){
   //Read from bluetooth and write to usb serial
   if(bluetooth.available()){
     char toSend = (char)bluetooth.read();
+//    Serial.print(toSend);
     if(toSend == 'd'){ 
       zeroScale(); 
-      //Tft.drawString("DAVE!",0,240,4,RED);
-      return;  
+      Tft.drawString("DAVE!",0,240,4,RED);
     }
     if(toSend == 'm'){
       zeroScale();
-//     Tft.drawString("MARTY!",0,240,4,RED);
-      return;  
+     Tft.drawString("MARTY!",0,240,4,RED);
     }
     if(toSend == 'a'){
       zeroScale();
-//      Tft.drawString("ARJAY!",0,240,4,RED);
-      return;  
+      Tft.drawString("ARJAY!",0,240,4,RED);
     }
     if(toSend == 'n'){
       zeroScale();
-//      Tft.drawString("ANDREA!",0,240,4,RED);
-      return;  
+      Tft.drawString("ANDREA!",0,240,4,RED);
     }
     if(toSend == 'r'){
       zeroScale();
-//      Tft.drawString("ROBIN!",0,240,4,RED);
-      return;  
+      Tft.drawString("ROBIN!",0,240,4,RED);
     }
   }
 
