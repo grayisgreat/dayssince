@@ -31,26 +31,13 @@ int bluetoothTx = 18;  //A4 matches jumper
 int bluetoothRx = 19;  //A5 atches jumper
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
 
-void setup()
-{
+void setup(){
   Tft.init();  //init TFT library
   Tft.drawString("0",90,40,10,WHITE);
   Tft.drawString("Days",0,160,4,WHITE);
   Tft.drawString("Since...",0,200,4,WHITE);
-//  Tft.drawString("0",0,240,4,RED);
-//  //Setup usb serial connection to computer
-//  Serial.begin(9600);
-//  //Setup Bluetooth serial connection to android
-//  // bluetooth.begin(38400);
-// // bluetooth.begin(115200);
-////  bluetooth.print("$$$");
-////  delay(100);
-// 
-// 
   bluetooth.println("U,9600,N");
   bluetooth.begin(9600);
-//  
-
 }
 
 void loop(){
