@@ -81,15 +81,14 @@ void loop(){
 }
 
 void printScreen(int days){
-      int left = 0;   //print days
-      if(days < 10){
-         left=90;
-      }else if(numDays > 9 && numDays < 100){
-         left=40;
-      }else if(numDays >= 99){
-         left=30;
-      }
-  
+  int left = 0;
+  if(days < 10){
+     left=90;
+  }else if(numDays > 9 && numDays < 100){
+     left=40;
+  }else if(numDays >= 99){
+    left=30;
+  }
   
   itoa(days, buffer, 10);
   int hSize = 10;
