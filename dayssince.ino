@@ -49,49 +49,50 @@ void loop(){
     if(toSend == 'd'){ 
       zeroScale(); 
       Tft.drawString("DAVE!",0,240,4,RED);
-    }
-    if(toSend == 'm'){
+    }else if(toSend == 'm'){
       zeroScale();
      Tft.drawString("MARTY!",0,240,4,RED);
-    }
-    if(toSend == 'a'){
+    }else if(toSend == 'a'){
       zeroScale();
       Tft.drawString("ARJAY!",0,240,4,RED);
-    }
-    if(toSend == 'n'){
+    }else if(toSend == 'n'){
       zeroScale();
       Tft.drawString("ANDREA!",0,240,4,RED);
-    }
-    if(toSend == 'r'){
+    }else if(toSend == 'r'){
       zeroScale();
       Tft.drawString("ROBIN!",0,240,4,RED);
     }
-  }
-
-  Point p = ts.getPoint();
-  p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
-  p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
-  
-  // press
-  if (p.z > __PRESURE) {
-    if(p.y > 290 && p.y < 341 && p.x < 20){
-      numDays +=10; 
-    }else if(p.y < 20 && p.x < 20){
-      numDays +=1; 
-    }
-    //print days
-    if(numDays < 10){
-       printScreen(numDays,90,10);
-    }else if(numDays > 9 && numDays < 100){
-       printScreen(numDays,40,10);
-    }else if(numDays >= 99){
-       printScreen(numDays,30,8);
+  }else{
+    Point p = ts.getPoint();
+    p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
+    p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
+    
+    // press
+    if (p.z > __PRESURE) {
+      if(p.y > 290 && p.y < 341 && p.x < 20){
+        numDays +=10; 
+        printScreen(numDays);
+      }else if(p.y < 20 && p.x < 20){
+        numDays +=1;
+       printScreen(numDays); 
+      }
     }
   }
 }
 
-void printScreen(int days, int left, int hSize){
+void printScreen(int days){
+      int left = 0;   //print days
+      if(days < 10){
+         left=90;
+      }else if(numDays > 9 && numDays < 100){
+         left=40;
+      }else if(numDays >= 99){
+         left=30;
+      }
+  
+  
   itoa(days, buffer, 10);
+  int hSize = 10;
   Tft.paintScreenBlack();
   Tft.drawString(buffer,left,40,hSize,WHITE);
   Tft.drawString("Days",0,160,4,WHITE);
@@ -100,5 +101,5 @@ void printScreen(int days, int left, int hSize){
 
 void zeroScale(){
       numDays = 0;
-      printScreen(0,90,10);
+      printScreen(0);
 }
