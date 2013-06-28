@@ -32,7 +32,6 @@ int bluetoothRx = 19;  //A5 atches jumper
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
 
 void setup(){
-//  Serial.begin(9600);
   bluetooth.println("U,9600,N");
   bluetooth.begin(9600);
   Tft.init();  //init TFT library
@@ -45,22 +44,30 @@ void loop(){
   //Read from bluetooth and write to usb serial
   if(bluetooth.available()){
     char toSend = (char)bluetooth.read();
-//    Serial.print(toSend);
     if(toSend == 'd'){ 
-      zeroScale(); 
+      zeroScale("DAVE!"); 
       Tft.drawString("DAVE!",0,240,4,RED);
     }else if(toSend == 'm'){
-      zeroScale();
+      zeroScale("MARTY!"); 
      Tft.drawString("MARTY!",0,240,4,RED);
     }else if(toSend == 'a'){
-      zeroScale();
+      zeroScale("ARJAY!"); 
       Tft.drawString("ARJAY!",0,240,4,RED);
     }else if(toSend == 'n'){
-      zeroScale();
+      zeroScale("ANDREA!"); 
       Tft.drawString("ANDREA!",0,240,4,RED);
     }else if(toSend == 'r'){
-      zeroScale();
+      zeroScale("ROBIN!"); 
       Tft.drawString("ROBIN!",0,240,4,RED);
+    }else if(toSend == '+'){
+      numDays += 1;
+      printScreen(numDays);
+    }else if(toSend == '-'){
+      numDays -= 1;
+      printScreen(numDays);
+    }else if(toSend == 'x'){
+      numDays += 10;
+      printScreen(numDays);
     }
   }else{
     Point p = ts.getPoint();
@@ -98,7 +105,9 @@ void printScreen(int days){
   Tft.drawString("Since...",0,200,4,WHITE);
 } 
 
-void zeroScale(){
+void zeroScale(String who){
+      char wBuff[10];
+      who.toCharArray(wBuff, 10); 
       numDays = 0;
       printScreen(0);
 }
