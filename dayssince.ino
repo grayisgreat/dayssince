@@ -63,8 +63,10 @@ void loop(){
       numDays += 1;
       printScreen(numDays);
     }else if(toSend == '-'){
-      numDays -= 1;
-      printScreen(numDays);
+      if(numDays > 0){
+        numDays -= 1;
+        printScreen(numDays);
+      }
     }else if(toSend == 'x'){
       numDays += 10;
       printScreen(numDays);
