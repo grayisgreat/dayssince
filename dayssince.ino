@@ -44,49 +44,61 @@ void loop(){
   //Read from bluetooth and write to usb serial
   if(bluetooth.available()){
     char toSend = (char)bluetooth.read();
-    if(toSend == 'd'){ 
-      zeroScale("DAVE!"); 
-      Tft.drawString("DAVE!",0,240,4,RED);
-    }else if(toSend == 'm'){
-      zeroScale("MARTY!"); 
-     Tft.drawString("MARTY!",0,240,4,RED);
-    }else if(toSend == 'a'){
-      zeroScale("ARJAY!"); 
-      Tft.drawString("ARJAY!",0,240,4,RED);
-    }else if(toSend == 'n'){
-      zeroScale("ANDREA!"); 
-      Tft.drawString("ANDREA!",0,240,4,RED);
-    }else if(toSend == 'r'){
-      zeroScale("ROBIN!"); 
-      Tft.drawString("ROBIN!",0,240,4,RED);
-    }else if(toSend == '+'){
-      numDays += 1;
-      printScreen(numDays);
-    }else if(toSend == '-'){
-      if(numDays > 0){
-        numDays -= 1;
-        printScreen(numDays);
-      }
-    }else if(toSend == 'x'){
-      numDays += 10;
-      printScreen(numDays);
-    }
-  }else{
-    Point p = ts.getPoint();
-    p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
-    p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
     
-    // press
-    if (p.z > __PRESURE) {
-      if(p.y > 290 && p.y < 341 && p.x < 20){
-        numDays +=10; 
+    switch (toSend) {
+      case 'd':    
+        zeroScale("DAVE!"); 
+        Tft.drawString("DAVE!",0,240,4,RED);
+        break;
+      case 'm':    
+        zeroScale("MARTY!"); 
+        Tft.drawString("MARTY!",0,240,4,RED);
+        break;
+      case 'a':    
+        zeroScale("ARJAY!"); 
+        Tft.drawString("ARJAY!",0,240,4,RED);
+        break;
+      case 'n':    
+        zeroScale("ANDREA!"); 
+        Tft.drawString("ANDREA!",0,240,4,RED);
+        break;
+      case 'r':    
+        zeroScale("ROBIN!"); 
+        Tft.drawString("ROBIN!",0,240,4,RED);
+        break;
+      case '+':    
+        numDays += 1;
         printScreen(numDays);
-      }else if(p.y < 20 && p.x < 20){
-        numDays +=1;
-       printScreen(numDays); 
-      }
+        break;  
+      case '-':    
+        if(numDays > 0){
+          numDays -= 1;
+          printScreen(numDays);
+        }
+        break;  
+      case 'x':    
+        numDays += 10;
+        printScreen(numDays);
+        break;        
+      default:
+        break;
     }
   }
+  
+//    Point p = ts.getPoint();
+//    p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
+//    p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
+//    
+//    // press
+//    if (p.z > __PRESURE) {
+//      if(p.y > 290 && p.y < 341 && p.x < 20){
+//        numDays +=10; 
+//        printScreen(numDays);
+//      }else if(p.y < 20 && p.x < 20){
+//        numDays +=1;
+//       printScreen(numDays); 
+//      }
+//    }
 }
 
 void printScreen(int days){
@@ -111,4 +123,5 @@ void zeroScale(String who){
       who.toCharArray(wBuff, 10); 
       numDays = 0;
       printScreen(0);
+//      Tft.drawString("DAVE!",0,240,4,RED);
 }
