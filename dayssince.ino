@@ -31,8 +31,7 @@ int bluetoothTx = 18;  //A4 matches jumper
 int bluetoothRx = 19;  //A5 atches jumper
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
 
-void setup()
-{
+void setup(){
   bluetooth.println("U,9600,N");
   bluetooth.begin(9600);
   Tft.init();
@@ -41,8 +40,7 @@ void setup()
   Tft.drawString("Since...",0,200,4,WHITE);
 }
 
-void loop()
-{
+void loop(){
   //Read from bluetooth and write to usb serial
   if(bluetooth.available()){
     char toSend = (char)bluetooth.read();
@@ -91,8 +89,7 @@ void loop()
   }
 }
 
-void printScreen(int days)
-{
+void printScreen(int days){
   int left = 0;
   if(days < 10){
      left=90;
@@ -109,8 +106,7 @@ void printScreen(int days)
   Tft.drawString("Since...",0,200,4,WHITE);
 } 
 
-void zeroScale(String who)
-{
+void zeroScale(String who){
       char wBuff[10];
       who.toCharArray(wBuff, 10); 
       numDays = 0;
